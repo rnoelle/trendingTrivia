@@ -23,7 +23,7 @@ You will get the data in pages. `Remember: a page of data, is a small slice of a
 
 1b. You will need to let the user click next page to get the next 10 question, and previous page to get the previous 10 questions.
 
-![Image of Project](https://github.com/rnoelle/trendingTrivia/blob/master/screenshot/screenshot1.jpg)
+![Image of Project](https://github.com/DevMountain/trendingTrivia/blob/master/screenshot/screenshot1.jpg)
 
 
 #### 2. All questions are multiple choice.
@@ -32,7 +32,7 @@ When the user selects an answer show right or wrong highlight their selected ans
 - Red for incorrect
 - Green for correct 
 
-![Image of Higlighting](https://github.com/rnoelle/trendingTrivia/blob/master/screenshot/screenshot3.jpg)
+![Image of Higlighting](https://github.com/DevMountain/trendingTrivia/blob/master/screenshot/screenshot3.jpg)
 
 
 #### 3. Filters
@@ -47,7 +47,7 @@ Make the `Search by Animal` button change whether or not the animal name input b
 Make the input box it filter all questions on the screen, and only the questions on the screen. 
 
 
-![Image of Filters](https://github.com/rnoelle/trendingTrivia/blob/master/screenshot/screenshot4.jpg)
+![Image of Filters](https://github.com/DevMountain/trendingTrivia/blob/master/screenshot/screenshot4.jpg)
 
 
 #### 4. Edit & Delete
@@ -69,7 +69,7 @@ Editing a question will PUT that question to the server.
 Deleting a question will DELETE that question from the server.
 
 
-![Image of Modal](https://github.com/rnoelle/trendingTrivia/blob/master/screenshot/screenshot2.jpg)
+![Image of Modal](https://github.com/DevMountain/trendingTrivia/blob/master/screenshot/screenshot2.jpg)
 
 #### 5. Add question
 
