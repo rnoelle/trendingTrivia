@@ -10,7 +10,7 @@ You'll be sharing the back-end so don't put anything inappropriate or offensive 
 
 You can find a live working copy of what you will be building here :
 
-TODO: Insert hosted URL
+https://practiceapi.devmountain.com/trendingTrivia/
 
 ### Requirements
 
@@ -117,4 +117,4 @@ The data structure of a trivia question looks like this
 
 You can find the API documentation for all the endpoints here :
 
-TODO: Insert API URL
+https://practiceapi.devmountain.com/
