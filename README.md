@@ -47,6 +47,9 @@ Make the `Search by Animal` button change whether or not the animal name input b
 Make the input box it filter all questions on the screen, and only the questions on the screen. 
 
 
+![Image of Filters](https://github.com/rnoelle/trendingTrivia/blob/master/screenshot/screenshot4.jpg)
+
+
 #### 4. Edit & Delete
 
 Add a gear to every question. The icon is found in the `styes/assets` folder.
