@@ -1,117 +1,119 @@
-## Setup and Getting the Questions
-  - Initialize your angular app and bind it to the html. We'll need a controller as well, bound to the body. Create a service and inject it into your controller.
-  - We need to get some trivia questions! In your controller, write a function called getQuestions that initiates a corresponding function in your service, which will make a ```GET``` request to ```https://devmountain.com/trivia/questions```. Set the results to $scope.questions and invoke the function. Try displaying the questions on the page!
-  - Add an ng-click to the All Questions button to run this function.
+## Trending Trivia
 
-## The Question Directive
-  - In order to do a bit more with our question data, let's make a directive.
-   - Restrict the directive to only be an element. The templateUrl should be ```/question.html```, already provided for you.
-   - Give your directive an isolate scope, with a two-way bound connection to the ```question``` attribute.
-   - In question.html, let's fill in the question and difficulty from $scope.question (marked by comments);
-   - For the options, let's add ng-repeat to the li element. This should ng-repeat over the properties of question.options.
-    - To ng-repeat over an object, the syntax is ```(key, value) in array```. The label should have the text (or value) from the option inside it.
-    - Add your directive to the index.html at the bottom of the article element.
-    - Let's give it an ng-repeat so we can show all the questions on scope.
-    - Pass in each question's data through the question attribute on the question element.
-    - Let's add functionality to these radio buttons - ng-repeats create their own child scope, so we'll need to access the parent (our directive's) scope. Add the following attributes to the input: ```id="{{$parent.question._id}}{{value}}" name="{{$parent.question._id}}"```Add this attribute to the label: ```for="{{$parent.question._id}}{{value}}"```
-    This will keep the directives' ids and names from running into each other.
-      - Give the input an ng-value (a starting angularized value) equal to the option key. Give it also ng-model to ```$parent.chosen_answer```.
-    - Having a number for difficulty isn't very user-friendly. Let's add a controller to our directive, and a variable on its scope - ```$scope.difficulty```. Write some ifs (or a switch statement!) to make ```$scope.difficulty``` to equal 'Easy' when the question's difficulty is 1, 'Medium' when it's 2, and 'Hard' when it's hard. Update your html to show this new variable instead.
-    - Add an ng-class that will add the class green when the question is easy, yellow when it's medium, and red when it's hard.
-    - How will you know when you get the answer right? This ng-class is a bit more tricky because of the ng-repeat. Add it to the li element: ```ng-class="{green: key == $parent.chosen_answer && key == $parent.question.correct_answer,
-        red: key == chosen_answer && key != question.correct_answer}"```
+### Summary
 
-##Search/Difficulty
-  - Phew! All that detail is rough, but it sure has made our question directive powerful.
-  - Use ng-click and ng-hide to make the search bar only show up after the search button is clicked.
-  - Use an angular filter to use this bar to search by animal.
-  - Add an ng-click with a function called getByDifficulty. This will initiate an API call. To get questions by difficulty, make a get request to ```https://devmountain.com/trivia/questions/difficulty/ + difficulty```. Change $scope.questions to reflect the response.
+Today we want you to write a trivia application!  
+We have created a back-end that you can hit to store and share data.
+You'll be sharing the back-end so don't put anything inappropriate or offensive in there.
 
-## Adding a Question
-  - We want to add more questions! Copy paste the following html into your index.html, below the article tag:
-  ```html
-   <div class="modal">
-    <form>
-      <h4 class="close" >X</h4>
-      <span>Question</span><input type="text" ng-model="<!-- Question -->">
-      <span>Animal it's about</span><input type="text" ng-model="<!-- Animal -->">
-      <span>Difficulty</span>
-      <div class="range">
-        <input type="range" min="1" max="3"
-       ng-model="<!-- Difficulty -->">
+### Live example
 
-        <h5>{{newQuestion.difficulty}}</h5>
-      </div>
-        <h4>Options</h4>
-        <div>
-          <input type="radio" ng-model="" value="1">
-          <input type="text" ng-model="">
-        </div>
-        <div>
-          <input type="radio" ng-model="" value="2">
-          <input type="text" ng-model="">
-        </div>
-        <div>
-          <input type="radio" ng-model="" value="3">
-          <input type="text" ng-model="">
-        </div>
-        <div>
-          <input type="radio" ng-model="" value="4">
-          <input type="text" ng-model="">
-        </div>
-      <div class="buttons">
-        <button class="green" >Save Question</button>
-        <button >Cancel</button>
-      </div>
+You can find a live working copy of what you will be building here :
 
-    </form>
-  </div>
-  ```
-  - Fill in the ng-models to create an object on scope called newQuestion. The radios should relate to a property called correct_answer and the texts beside them to a different numbered option (ie ```newQuestion.options[1]```).
-  - Add a function in the controller that will take in the newQuestion data and initiate a POST request in your service to ```https://devmountain.com/trivia/questions```. The newQuestion data should be the body.
-  - In the .then, set $scope.questions to the response, and reset $scope.newQuestion to an empty object.
-  - Add an ng-click to the Save Question button to run the function.
-  - We don't want this modal open all the time! Add an ng-show to the entire modal equal to a variable on scope called modalOpen. Add ng-clicks to the cancel button and the addQuestion buttons to change this variable and show/hide the modal. Also, in the .then of the addQuestion function in your controller, reset modalOpen to false.
+TODO: Insert hosted URL
 
-## Update/Delete Question
-  - Paste the following into your question.html:
-```html
-<div class="modal" >
-    <form>
-      <h4 class="close">X</h4>
-      <span>Question</span><input type="text" ng-model="update.question" ng-value="question.question">
-      <span>Animal it's about</span><input type="text" ng-model="update.animal" ng-value="question.animal">
-      <span>Difficulty</span>
-      <div class="range">
-        <input type="range" min="1" max="3" ng-model="update.difficulty" value="question.difficulty">
-        <h5>{{update.difficulty}}</h5>
-      </div>
-        <h4>Options</h4>
-        <div ng-repeat="(key, value) in question.options">
-          <input type="radio" ng-model="update.correct_answer" ng-value="key">
-          <input type="text" ng-model="update.options[key]" ng-value="value">
-        </div>
-        <div class="buttons">
-      <button class="red">Delete Question</button>
-      <button class="green">Save Changes</button>
-      <button>Cancel</button>
-    </div>
-    </form>
-  </div>
-  ```
-  - Add ng-clicks and ng-shows to make this modal work. The opening click should be on each question's gear. Updating a question requires a PUT request to ```https://devmountain.com/trivia/questions/ + questionId``` and deleting a question requires a DELETE request to the same URL. Remember, from the directive's controller, you'll need to access its parent's scope to access getQuestions (which you might want to put in the .then).
+### Requirements
+
+#### Trivia questions
+
+This app is all about trivia questions. 
+
+##### 1. You will need to get trivia questions from the server and show them on the screen.
+
+You will get the data in pages. `Remember: a page of data, is a small slice of all the questions on the server. IE - you will only get 10 at a time`
+
+1b. You will need to let the user click next page to get the next 10 question, and previous page to get the previous 10 questions.
+
+TODO: INSERT PICTURE OF whole screen
 
 
-##Pagination
-  - We're only getting the first ten results! The API is set up to allow us to use a query to select different pages. By default, it sends back the first page (page 0).
-    - To make pagination work, let's create a variable on scope called ```page``` and set it to 0.
-    - In index.html, we'll need two elements at the bottom inside our article - one that says ```< Prev Page``` and one that says ```Next Page >```.
-    - In your controller, you'll need a function that changes pages. This function will need to initiate a call to the API and change the questions on scope based on the response. Remember to add a corresponding function in your service.
-    - Going back to index.html, add the functionality to your buttons with ng-click.
-    - Use ng-hide to make the ```< Prev Page``` button hidden if the page is 0 and ```Next Page >``` hidden if the number of questions on the page is less than 10.
-    - Let's add to our getQuestions function to reset $scope.page to 0 whenever it runs (because it gets the first page by default).
-    - For styling, give them both class ```change-page``` and give class ```left``` to ```< Prev Page``` and ```right``` to ```Next Page >```.
+##### 2. All questions are multiple choice.
 
-## Black Diamond
-  - Right now, you're using a filter to get only questions about a certain animal. However, it only works with the results on the page. There is another endpoint on the api for searching by animal: ```'GET' /trivia/questions?animal=elephant``` Hit it instead when clicking on the search by animals button.
-  - If you really want a challenge, add NgAnimate to your project and use it to add animations to the modals.
+When the user selects an answer show right or wrong highlight their selected answer:
+- Red for incorrect
+- Green for correct 
+
+TODO: INSERT PICTURES HERE OF HIGHLIGHTING
+
+##### 3. Filters
+
+The user should be able to filter by:
+* all questions
+* easy, medium and hard diffuculty
+* by animal
+
+Make the `Search by Animal` button change whether or not the animal name input box is visible.
+
+Make the input box it filter all questions on the screen, and only the questions on the screen. 
+
+TODO : Insert picture of expanded input box
+
+
+##### 4. Edit & Delete
+
+Add a gear to every question. The icon is found in the `styes/assets` folder.
+
+When the gear is clicked for a question, it needs to open the edit modal, and populate the modal with that questions data.
+
+The modal will allow users to edit and delete questions.
+
+in main.css search for `ALERTDELETEME` and remove the line it is on.  This will make the modal appear.
+
+The edit modal is already in the index.html file.  You will need to use ng-show or ng-hide to make it appear when the user clicks the gear icon.
+
+The edit modal should only show the `edit & delete question buttons` at the bottom, and should hide the `add question buttons`.  These two button groups are labeled in the index.html file.
+
+Editing a question will PUT that question to the server.
+
+Deleting a question will DELETE that question from the server.
+
+
+TODO: Screenshot of modal
+
+##### 5. Add question
+
+Add question will use the same modal as the edit.
+
+The `add question buttons` need to be visible, and the `edit & delete question buttons` need to be hidden.
+
+Add a question will post it to the server.
+
+##### 6. Styling
+
+We have put styles for everything in the styles folder, but you can make your own or use those.  Just make it look the same.
+
+There some effects when hovering over a question, and over the gear.  Try to get those as well.
+
+###### 7. Black diamond
+
+Remember the users answers on local storage.
+
+
+### References
+
+#### Data Structure
+
+The data structure of a trivia question looks like this
+
+```
+{
+  _id: {type: String}, (The API will add this for you, do not send it to the server)
+  question: {type: String},
+  animal: {type: String},
+  difficulty: {type: Number},
+  options: {
+    1: {type: String},
+    2: {type: String},
+    3: {type: String},
+    4: {type: String}
+  },
+  correct_answer: {type: Number},
+  date_entered: {type: Date, default:new Date()}
+}
+```
+
+#### API Reference
+
+You can find the API documentation for all the endpoints here :
+
+TODO: Insert API URL

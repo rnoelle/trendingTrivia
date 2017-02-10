@@ -13,23 +13,70 @@
   <header>
     <div></div>
     <h1>Trivia Trends</h1>
-    <button ng-click="modalOpen=true"><span>+</span> Add Question</button>
+    <button><span>+</span> Add Question</button>
   </header>
   <article>
-  <nav>
-    <a>All Questions</a>
-    <a>Easy</a>
-    <a>Medium</a>
-    <a>Hard</a>
-    <a>Search by Animal</a>
-  </nav>
-  <div class="search">
-    <input type="text" placeholder="Animal to search by">
-  </div>
+    <nav>
+      <a>All Questions</a>
+      <a>Easy</a>
+      <a>Medium</a>
+      <a>Hard</a>
+      <a>Search by Animal</a>
+    </nav>
+    <div class="search">
+      <input type="text" placeholder="Animal to search by">
+    </div>
 
-  <!-- Question directive here -->
+    <!-- Questions go here -->
 
   </article>
+
+  <div class="modal">
+    <form>
+      <h4 class="close">X</h4>
+      <span>Question</span><input type="text" ng-model="<!-- Question -->">
+      <span>Animal it's about</span><input type="text" ng-model="<!-- Animal -->">
+      <span>Difficulty</span>
+      <div class="range">
+        <input type="range" min="1" max="3" ng-model="<!-- Difficulty -->">
+
+        <h5>{{newQuestion.difficulty}}</h5>
+      </div>
+      <h4>Options</h4>
+      <div>
+        <input type="radio" ng-model="" value="1">
+        <input type="text" ng-model="">
+      </div>
+      <div>
+        <input type="radio" ng-model="" value="2">
+        <input type="text" ng-model="">
+      </div>
+      <div>
+        <input type="radio" ng-model="" value="3">
+        <input type="text" ng-model="">
+      </div>
+      <div>
+        <input type="radio" ng-model="" value="4">
+        <input type="text" ng-model="">
+      </div>
+
+      <!--Add question buttons-->
+      <div class="buttons">
+        <button class="green">Save Question</button>
+        <button>Cancel</button>
+      </div>
+
+      <!--Edit & Delete question buttons-->
+      <div class="buttons">
+        <button class="red">Delete Question</button>
+        <button class="green">Save Changes</button>
+        <button>Cancel</button>
+      </div>
+
+    </form>
+  </div>
+
+
 
 
 
