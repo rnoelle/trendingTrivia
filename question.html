@@ -1,42 +1,17 @@
 <div class="question-wrapper">
 
-<h3>{{question.question}}</h3>
-<div ng-class="{green: difficulty == 'Easy', yellow: difficulty == 'Medium', red: difficulty == 'Hard'}">{{difficulty}}</div>
-<div class="gear" ng-click="modalOpen = true">
+<h3><!-- Question --></h3>
+<div ><!-- Difficulty --></div>
+<div class="gear" >
   <img src="/styles/assets/gear.svg" alt="">
 </div>
 <ul>
-  <li ng-repeat="(key, value) in question.options"
-    ng-class="{green: key == $parent.chosen_answer && key == $parent.question.correct_answer,
-      red: key == chosen_answer && key != question.correct_answer}"> <!-- Repeated for each option -->
-    <input id="{{$parent.question._id}}{{value}}" type="radio" name="chosen_answer{{$parent.question._id}}" ng-model="$parent.chosen_answer" ng-value="key">
-      <label for="{{$parent.question._id}}{{value}}">{{value}}</label>
+  <li > <!-- Repeated for each option -->
+    <input type="radio">
+      <label><!-- Option text --></label>
   </li>
 </ul>
 
 </div>
 
 <!-- Modal -->
-
-<div class="modal" ng-show="modalOpen">
-  <form>
-    <h4 class="close" ng-click="modalOpen = false">X</h4>
-    <span>Question</span><input type="text" ng-model="update.question" ng-value="question.question">
-    <span>Animal it's about</span><input type="text" ng-model="update.animal" ng-value="question.animal">
-    <span>Difficulty</span>
-    <div class="range">
-      <input type="range" min="1" max="3" ng-model="update.difficulty" value="question.difficulty">
-      <h5>{{update.difficulty}}</h5>
-    </div>
-      <h4>Options</h4>
-      <div ng-repeat="(key, value) in question.options">
-        <input type="radio" ng-model="update.correct_answer" ng-value="key">
-        <input type="text" ng-model="update.options[key]" ng-value="value">
-      </div>
-      <div class="buttons">
-    <button class="red" ng-click="deleteQuestion(question._id)">Delete Question</button>
-    <button class="green" ng-click="updateQuestion(update)">Save Changes</button>
-    <button ng-click="modalOpen = false">Cancel</button>
-  </div>
-  </form>
-</div>
