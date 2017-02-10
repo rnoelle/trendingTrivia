@@ -29,9 +29,10 @@
 
 ## Adding a Question
   - We want to add more questions! Copy paste the following html into your index.html, below the article tag:
-  ``` <div class="modal" ng-show="modalOpen">
+  ```html
+   <div class="modal">
     <form>
-      <h4 class="close" ng-click="modalOpen = false">X</h4>
+      <h4 class="close" >X</h4>
       <span>Question</span><input type="text" ng-model="<!-- Question -->">
       <span>Animal it's about</span><input type="text" ng-model="<!-- Animal -->">
       <span>Difficulty</span>
@@ -60,7 +61,7 @@
         </div>
       <div class="buttons">
         <button class="green" >Save Question</button>
-        <button ng-click="modalOpen = false">Cancel</button>
+        <button >Cancel</button>
       </div>
 
     </form>
@@ -74,7 +75,8 @@
 
 ## Update/Delete Question
   - Paste the following into your question.html:
-  ``` <div class="modal" >
+```html
+<div class="modal" >
     <form>
       <h4 class="close">X</h4>
       <span>Question</span><input type="text" ng-model="update.question" ng-value="question.question">
@@ -95,7 +97,8 @@
       <button>Cancel</button>
     </div>
     </form>
-  </div>```
+  </div>
+  ```
   - Add ng-clicks and ng-shows to make this modal work. The opening click should be on each question's gear. Updating a question requires a PUT request to ```https://devmountain.com/trivia/questions/ + questionId``` and deleting a question requires a DELETE request to the same URL. Remember, from the directive's controller, you'll need to access its parent's scope to access getQuestions (which you might want to put in the .then).
 
 
