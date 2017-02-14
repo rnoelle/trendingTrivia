@@ -12,61 +12,108 @@
   <header>
     <div></div>
     <h1>Trivia Trends</h1>
-    <button ng-click="modalOpen=true"><span>+</span> Add Question</button>
+    <button ng-click="openModal()"><span>+</span> Add Question</button>
   </header>
+
+  <!-- Main section -->
   <article>
-  <nav>
-    <a ng-click="getQuestions()">All Questions</a>
-    <a ng-click="getByDifficulty(1)">Easy</a>
-    <a ng-click="getByDifficulty(2)">Medium</a>
-    <a ng-click="getByDifficulty(3)">Hard</a>
-    <a ng-click="toggleSearch()">Search by Animal</a>
-  </nav>
-  <div class="search" ng-hide="!searchOpen">
-    <input type="text" ng-model="search.animal" placeholder="Animal to search by">
-  </div>
-    <question question="question" ng-repeat="question in questions | filter: search"></question>
+    <nav>
+      <a ng-click="getQuestions()">All Questions</a>
+      <a ng-click="getByDifficulty(1)">Easy</a>
+      <a ng-click="getByDifficulty(2)">Medium</a>
+      <a ng-click="getByDifficulty(3)">Hard</a>
+      <a ng-click="toggleSearch()">Search by Animal</a>
+    </nav>
+
+    <!-- Search bar -->
+    <div class="search" ng-hide="!searchOpen">
+      <input type="text" ng-model="search.animal" placeholder="Animal to search by">
+    </div>
+
+    <!-- Questions -->
+    <div class="question-wrapper"
+      ng-repeat="question in questions | filter: search"
+      ng-class="{green: question.chosenAnswer && question.chosenAnswer == question.correct_answer, red: question.chosenAnswer && question.chosenAnswer != question.correct_answer}">
+
+      <h3>{{question.question}}</h3>
+      <div ng-class="{green: question.labelDifficulty == 'Easy', yellow: question.labelDifficulty == 'Medium', red: question.labelDifficulty == 'Hard'}">
+        {{question.labelDifficulty}}
+      </div>
+
+      <div class="gear" ng-click="openModal(question)">
+        <img src="/styles/assets/gear.svg" alt="">
+      </div>
+
+      <!-- Question Options -->
+      <ul>
+        <li ng-click="checkAnswer(question._id, 1)"
+          ng-class="{chosen: question.chosenAnswer == 1}">{{question.options[1]}}</li>
+        <li ng-click="checkAnswer(question._id, 2)"
+          ng-class="{chosen: question.chosenAnswer == 2}">{{question.options[2]}}</li>
+        <li ng-click="checkAnswer(question._id, 3)"
+          ng-class="{chosen: question.chosenAnswer == 3}">{{question.options[3]}}</li>
+        <li ng-click="checkAnswer(question._id, 4)"
+          ng-class="{chosen: question.chosenAnswer == 4}">{{question.options[4]}}</li>
+      </ul>
+
+    </div>
     <h3 class="change-page left" ng-click="changePage(page, -1)" ng-hide="page == 0">< Prev Page</h3>
     <h3 class="change-page right" ng-click="changePage(page, 1)" ng-hide="questions.length < 10">Next Page ></h3>
   </article>
 
+  <!-- Modal -->
   <div class="modal" ng-show="modalOpen">
     <form>
-      <h4 class="close" ng-click="modalOpen = false">X</h4>
-      <span>Question</span><input type="text" ng-model="newQuestion.question">
-      <span>Animal it's about</span><input type="text" ng-model="newQuestion.animal">
+      <h4 class="close" ng-click="closeModal()">X</h4>
+
+      <span>Question</span>
+      <input type="text" ng-model="currentQuestion.question">
+
+      <span>Animal it's about</span>
+      <input type="text" ng-model="currentQuestion.animal">
+
       <span>Difficulty</span>
       <div class="range">
-        <input type="range" min="1" max="3" ng-model="newQuestion.difficulty">
-        <h5>{{newQuestion.difficulty}}</h5>
-      </div>
-        <h4>Options</h4>
-        <div>
-          <input type="radio" ng-model="newQuestion.correct_answer" value="1">
-          <input type="text" ng-model="newQuestion.options[1]">
-        </div>
-        <div>
-          <input type="radio" ng-model="newQuestion.correct_answer" value="2">
-          <input type="text" ng-model="newQuestion.options[2]">
-        </div>
-        <div>
-          <input type="radio" ng-model="newQuestion.correct_answer" value="3">
-          <input type="text" ng-model="newQuestion.options[3]">
-        </div>
-        <div>
-          <input type="radio" ng-model="newQuestion.correct_answer" value="4">
-          <input type="text" ng-model="newQuestion.options[4]">
-        </div>
-      <div class="buttons">
-        <button class="green" ng-click="addQuestion(newQuestion)">Save Question</button>
-        <button ng-click="modalOpen = false">Cancel</button>
+        <input type="range" min="1" max="3" ng-model="currentQuestion.difficulty">
+        <h5>{{currentQuestion.difficulty}}</h5>
       </div>
 
+      <h4>Options</h4>
+      <div>
+        <input type="radio" ng-model="currentQuestion.correct_answer" value="1">
+        <input type="text" ng-model="currentQuestion.options[1]">
+      </div>
+      <div>
+        <input type="radio" ng-model="currentQuestion.correct_answer" value="2">
+        <input type="text" ng-model="currentQuestion.options[2]">
+      </div>
+      <div>
+        <input type="radio" ng-model="currentQuestion.correct_answer" value="3">
+        <input type="text" ng-model="currentQuestion.options[3]">
+      </div>
+      <div>
+        <input type="radio" ng-model="currentQuestion.correct_answer" value="4">
+        <input type="text" ng-model="currentQuestion.options[4]">
+      </div>
+
+      <!-- Buttons when adding Question -->
+      <div class="buttons" ng-show="addingNew">
+        <button class="green" ng-click="addQuestion(currentQuestion)">Save Question</button>
+        <button ng-click="closeModal()">Cancel</button>
+      </div>
+      <!-- Buttons when editing -->
+      <div class="buttons" ng-show="editing">
+        <button class="red" ng-click="deleteQuestion(currentQuestion._id)">Delete Question</button>
+        <button class="green" ng-click="updateQuestion(currentQuestion)">Save Changes</button>
+        <button ng-click="closeModal()">Cancel</button>
+      </div>
     </form>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js" charset="utf-8"></script>
   <script src="./app.js" charset="utf-8"></script>
+  <script src="./mainCtrl.js" charset="utf-8"></script>
+  <script src="./dataService.js" charset="utf-8"></script>
 </body>
 
 </html>

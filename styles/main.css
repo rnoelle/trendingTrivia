@@ -122,7 +122,9 @@ div.gear:hover {
   display: flex;
   flex-wrap: wrap;
 }
-
+.chosen {
+  background: rgba(121, 121, 121, 0.43);
+}
 ul li {
   width: 40%;
   margin-bottom: 1rem;
