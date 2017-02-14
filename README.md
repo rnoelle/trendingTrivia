@@ -12,6 +12,14 @@ You can find a live working copy of what you will be building here :
 
 https://practiceapi.devmountain.com/trendingTrivia/
 
+#### API Reference
+
+You can find the API documentation for all the endpoints here :
+
+https://practiceapi.devmountain.com/
+
+
+
 ### Requirements
 
 This app is all about trivia questions. 
@@ -113,8 +121,3 @@ The data structure of a trivia question looks like this
 }
 ```
 
-#### API Reference
-
-You can find the API documentation for all the endpoints here :
-
-https://practiceapi.devmountain.com/
