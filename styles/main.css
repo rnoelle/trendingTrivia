@@ -132,6 +132,10 @@ ul li {
   text-align: justify;
   padding: .5em;
 }
+ul li:hover {
+  opacity: .65;
+  cursor: pointer;
+}
 label {
   padding: .5rem;
   line-height: 1.15rem;
@@ -139,9 +143,7 @@ label {
 li input {
   float: left;
 }
-ul li label:hover, input:hover + label {
-  opacity: .65;
-}
+
 label, input[type="radio"], input[type="range"] {
   cursor: pointer;
 }
