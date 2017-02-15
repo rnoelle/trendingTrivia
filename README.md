@@ -22,7 +22,7 @@ https://practiceapi.devmountain.com/
 
 ### Requirements
 
-This app is all about trivia questions. 
+This app is all about trivia questions.
 
 
 #### 1. You will need to get trivia questions from the server and show them on the screen.
@@ -36,7 +36,7 @@ You will get the data in pages. `Remember: a page of data, is a small slice of a
 
 #### 2. All questions are multiple choice.
 
-When the user selects an answer show right or wrong highlight their selected answer:
+When the user selects an answer highlight the question card:
 - Red for incorrect
 - Green for correct 
 
@@ -52,7 +52,7 @@ The user should be able to filter by:
 
 Make the `Search by Animal` button change whether or not the animal name input box is visible.
 
-Make the input box it filter all questions on the screen, and only the questions on the screen. 
+Make the input box it filter all questions on the screen, and only the questions on the screen.
 
 
 ![Image of Filters](https://github.com/DevMountain/trendingTrivia/blob/master/screenshot/screenshot4.jpg)
@@ -120,4 +120,3 @@ The data structure of a trivia question looks like this
   date_entered: {type: Date, default:new Date()}
 }
 ```
-
